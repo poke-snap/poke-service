@@ -56,18 +56,26 @@ exports.handler = async (event, context) => {
   // console.log(event);
 
   const params = querystring.parse(event.body);
-  // console.log(params)
+  console.log(`Query Parameters :`);
+  console.log(params)
+  console.log(`Event Body:`);
+  console.log(event.body);
+  console.log(`Username: ${event.body['username']}`);
 
   const queryParams = {
     TableName: 'poke-snap',
     Key: {
-      username: 'seanytak'//params['user_id']
+      username: JSON.parse(event.body)['username']//params['username']//event.body['username']//params['user_id']
     }
   }
 
   const response = {
     statusCode: 200,
-    body: JSON.stringify([params['user_id'], 'Hello!', params]),
+    body: JSON.stringify({
+      username: event.body['username'], 
+      body: event.body, 
+      params: params
+    }),
   };
 
   _ = await sendPoke(queryParams)
