@@ -1,5 +1,4 @@
 const AWS = require('aws-sdk');
-const querystring = require('querystring');
 const { Expo } = require('expo-server-sdk');
 
 
@@ -51,35 +50,28 @@ async function sendPoke(params) {
   console.log('Sent Poke');
 }
 
-
-exports.handler = async (event, context) => {
-  // console.log(event);
-
-  const params = querystring.parse(event.body);
-  console.log(`Query Parameters :`);
-  console.log(params)
-  console.log(`Event Body:`);
-  console.log(event.body);
-  console.log(`Username: ${event.body['username']}`);
-
+async function requestHandler(request) {
   const queryParams = {
     TableName: 'poke-snap',
     Key: {
-      username: JSON.parse(event.body)['username']//params['username']//event.body['username']//params['user_id']
+      username: request['username']//params['username']//event.body['username']//params['user_id']
     }
-  }
+  };
+
+  await sendPoke(queryParams);
 
   const response = {
     statusCode: 200,
-    body: JSON.stringify({
-      username: event.body['username'], 
-      body: event.body, 
-      params: params
-    }),
+    body: JSON.stringify({request}),
   };
 
-  _ = await sendPoke(queryParams)
+  return response;
+}
 
+
+exports.handler = async (event, context) => {
+
+  requestHandler(JSON.parse(event.body));
 
   return response;
 };
