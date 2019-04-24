@@ -10,8 +10,8 @@ Content-Type: application/json
 
 {
     "body": {
-        "username": "John Smith"
-        "expo-push-token": "ExponentPushToken[yBe08sIBCL4W1T2I8kGw6Y]"
+        "username": "John Smith",
+        "expo-push-token": "ExponentPushToken[yBe08sIBCL4W1T2I8kGw6Y]",
         "location": [20.00000, 21.00000]
     }
 }
