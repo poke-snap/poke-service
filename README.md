@@ -1,6 +1,6 @@
 # Poke Service
 
-The Poke Service receives poke requests from the Poke Snap Mobile Platform and forwards them to the appropriate device. It is architecturally designed to run as a Function as a Service (FaaS) on a platform such as AWS Lambda. 
+The Poke Service receives poke requests from the Poke Snap Mobile Platform and forwards them to the appropriate device. It is architecturally designed to run as a `Function as a Service (FaaS)` on a platform such as `AWS Lambda`. It is currently designed to utilize `AWS DynamoDB` to validate the information in a request and `Expo Push Tokens` to send a `Push Notification` to the proper device.
 
 An example request to the service is below:
 ```http
@@ -15,6 +15,20 @@ Content-Type: application/json
         "location": [20.00000, 21.00000]
     }
 }
+```
+
+## Getting Started
+
+### Prerequisites
+- [Git](https://git-scm.com/)
+- [NodeJS](https://nodejs.org/en/)
+
+### Installation
+
+Run the following command:
+
+```
+npm install
 ```
 
 ## Deployment
@@ -33,3 +47,6 @@ To deploy this service on other platforms, only `requestHandler(...)` must be in
 - NodeJS
 - AWS SDK
 - Expo Server SDK
+
+## License
+[MIT](https://github.com/poke-snap/poke-service/blob/master/LICENSE)
